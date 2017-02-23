@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies and Their Ratings</title>
+</head>
+<body>
+    <!--Makes paragraphs with movies and made up ratings-->
+    <p>Star Wars <span class="myRating">5 stars</span></p>
+    <p>Back to the Future <span class="myRating">5 stars</span></p>
+    <p>Airplane! <span class="myRating">5 stars</span></p>
+    <p>Titanic <span class="myRating">4 stars</span></p>
+    <p>Snakes on a Plane <span class="myRating">3 stars</span></p>
+
+<script>
+    function superStar() {
+//Creates variable that references all elements with the class myRating
+        var ratings = document.getElementsByClassName("myRating");
+//        Stores unicode for star in a variable
+        var star = '\u2605';
+//        Loops through all the elements referenced in variable
+            for (var x = 0; x < ratings.length; x++) {
+//                Gets the element's text value and stores in variable
+                var spanText = ratings[x].innerHTML;
+//                Defines variable
+                var starNumber = spanText.substring(0, 1);
+                var convertedString = "";
+//                Loops through the split string number
+                for (var i = 0; i < starNumber; i++) {
+                    convertedString = convertedString + star;
+                }
+//                Sets the element's value back
+                ratings[x].innerHTML = convertedString;
+            }
+    }
+//    Runs the function on startup
+    window.onload = superStar;
+    </script>
+</body>
+</html>
+
+
+

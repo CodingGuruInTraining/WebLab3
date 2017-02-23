@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How Big is This Window</title>
+</head>
+<body>
+<script>
+//    Adds a resize event listener to the window
+    window.addEventListener("resize", sizeChanged);
+
+    function sizeChanged() {
+//        Retrieves the windows's width and height measurements, then
+//        calculates the window's area
+        var bodyWidth = window.innerWidth;
+        var bodyHeight = window.innerHeight;
+        var windowSize = bodyWidth * bodyHeight;
+//        Displays a pop-up window with the area in pixels
+        alert("The window's area now has " + windowSize + " pixels.");
+    }
+</script>
+</body>
+</html>

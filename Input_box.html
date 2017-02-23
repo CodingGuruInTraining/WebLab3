@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input_box</title>
+</head>
+<body>
+
+<form>
+    <!--Creates a button element-->
+    <br>
+    <button id="myButton" type="button">Button</button>
+
+    <!--Creates textbox element with a placeholder-->
+    <input type="text" id="textbox" placeholder="Text goes here">
+
+    <!--Creates an unordered list with nothing in it-->
+    <ul id="unorderedList">
+    </ul>
+</form>
+
+<script>
+//Adds event listener to the button element that runs function below.
+    document.getElementById("myButton").addEventListener('click', addLine);
+
+    function addLine() {
+//        Grabs text value of textbox and stores in variable
+        var textValue = document.getElementById("textbox").value;
+
+//        Checks if the text box isn't blank
+        if (textValue != "") {
+//            Then checks if the entered text isn't over 50 characters
+            if (textValue.length <= 50) {
+//                Grabs the list element and stores in variable
+                var unordList = document.getElementById("unorderedList");
+//                Creates new element and stores in variable
+                var newItem = document.createElement("li");
+//                Sets the new element's value to what is in the textbox
+                newItem.innerHTML = textValue;
+//                Adds new element to the list
+                unordList.appendChild(newItem);
+//                Clears the textbox
+                document.getElementById("textbox").value = "";
+            }
+            else {
+                alert("Please limit your entry to 50 or less characters.");
+            }
+        }
+    }
+
+//    Grabs the textbox element and adds a keydown event function to it.
+    var mytextbox = document.getElementById("textbox");
+    mytextbox.onkeydown = function() {
+        var key = event.keyCode || event.charCode;
+//        Checks if the entered character is either a <, >, &, ', or "
+        if (key == 188 || key == 55 || key == 190 || key == 222) {
+//            Displays a message and prevents the character from being entered
+            alert("That character is not allowed!");
+            return false;
+        }
+    };
+</script>
+
+</body>
+</html>
+
+<!--Found some help from:-->
+<!--http://stackoverflow.com/questions/9906885/detect-backspace-and-del-on-input-event-->

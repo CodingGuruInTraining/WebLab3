@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Me Impressed!</title>
+</head>
+<body>
+    <style>
+        /*Increases the size of the two buttons for better visuals*/
+        #display {
+            height: 300px;
+            width: 300px;
+            font-size: 20px;
+        }
+
+        #saver {
+            height: 50px;
+        }
+    </style>
+
+    <!--Creates a button and assigns a function to its onclick attribute-->
+    <center><button id="display" onclick="pickRandomColor(this)" > Here is a random color!</button>
+<!--Spacers-->
+<br>
+<br>
+    <!--Creates second button with the same function associated with it-->
+    <button id="saver" onclick="pickRandomColor(this)"> Click Here to save this color forever</button>
+
+    <!--Creates a table to hold saved colors-->
+    <table id = 'mytable' border="1" style="text-indent: 2px">
+        <!--Spacers-->
+        <br>
+        <br>
+        <!--Adds column headers-->
+        <tr>
+            <th class="center"> Your Saved Color</th>
+            <th class="center">Hex Code Value</th>
+        </tr>
+    </table>
+    </center>
+<script>
+
+//    Defines two global variables
+    var dontSave = false;
+    var boxColor;
+
+//    Function for selecting a random color and what to do with it based off the global
+//    boolean variable and which button was pressed
+    function pickRandomColor(element) {
+//        First grabs the id of the active element (button pressed)
+        var activeElement = document.activeElement.id;
+
+        var r = Math.floor(Math.random() * 255);   //Pick a random number between 0 and 1
+        var g = Math.floor(Math.random() * 255);   //Multiply by 255 to get a number in the correct range
+        var b = Math.floor(Math.random() * 255);   //Then convert it to an int
+        //Colors can be created as "rgb(33, 52, 15)" where the numbers are R, G, B values.
+        //This is expected as a string.
+        var colorString = "rgb(" + r + ", " + g + ", " + b + ")";
+        console.log(colorString);   //Avoid for production apps, OK for developing.
+        // You can see the output from this in the developer JavaScript console.
+
+//        Runs function that converts rgb color to hex code color
+        var hexCode = rgbToHex(r, g, b);
+//        Gathers id names of the two buttons
+        var saveTime = document.getElementById("saver").id;
+        var showTime = document.getElementById("display").id;
+
+//        Checks if the saving button was pressed
+        if (activeElement == saveTime && dontSave == false) {
+//            Retrieves the table element
+            var table = document.getElementById("mytable");
+            // Create an empty table row
+            var row = table.insertRow(1);
+            // Creates two cells in new row
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+
+            // First cell receives last color displayed with display button.
+            // Second cell receives the hex code for that color.
+            // Either the rgb or hex code can be used.
+            cell1.style.backgroundColor = boxColor;
+            cell2.innerHTML = boxColor;
+//            Sets boolean to true, which stops repeating saves
+            dontSave = true;
+        }
+//        Checks if the display button was pressed and changes its color to
+//        the randomly picked one. The hex code is saved to the global variable
+//        and the boolean is set back to false indicating a new color is shown.
+        else if (activeElement == showTime) {
+            element.style.backgroundColor = hexCode;
+            dontSave = false;
+            boxColor = hexCode;
+        }
+    }
+
+//    Function found that converts the rgb numbers to hex code by adjusting the
+//    numbers by specific lengths.
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+</script>
+
+</body>
+</html>
+
+<!--rgb converter obtained from:-->
+<!--http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb-->

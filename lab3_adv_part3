@@ -1,0 +1,7 @@
+By entering HTML elements to the input box, I was able to change some aspects of the page such as the
+color of bullet points.
+If left unchecked, this could allow others to break some part of the page or even
+gain access to the web servers.
+To prevent this, there could be a keypress event watching for certain characters and immediately delete
+them. Another option may be to replace the same specific characters from the input string before any
+other action is taken.
